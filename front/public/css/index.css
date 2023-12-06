@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+* {
+    margin: 0px;
+    padding: 0px;
+    user-select: none;
+    -webkit-user-drag: none;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(0deg, rgba(66,255,215,1) 0%, rgba(72,73,255,1) 43%, rgba(255,0,202,1) 99%);
+}
+img {
+    image-rendering: pixelated;
+    width: 400px;
+}
+#title {
+    position: absolute;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: opacity .5s;
+}
+#start {
+    position: absolute;
+    bottom: 20vh;
+    animation-name: textAnime;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    font-size: 1rem;
+}
+#sign-in-container {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    transition: opacity .5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20vh;
+    color: #fff;
+}
+#username-input:focus , #password-input:focus  {
+    outline: none;
+}
+#username-input , #password-input  {
+    padding: 10px;
+    width: 70vw;
+    height: 4vh;
+    border-radius: 10px;
+    border: none;
+}
+#username, #password {
+    margin-top: 5vh;
+}
+#Login {
+    font-size: 3.5rem;
+}
+#sign-in {
+    margin-top: 5vh;
+    font-size: 2rem;
+}
+@keyframes textAnime {
+    from {
+        font-size: 1.1rem;
+    }
+    to {
+        font-size: 1rem;
+    }
+}
+.fade-in {
+    opacity: 1;
+}
+.fade-out {
+    opacity: 0;
+}
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+.hidden-left {
+    transform: translate(-1000px);
+}
+.hidden-right {
+    transform: translate(1000px);
+}

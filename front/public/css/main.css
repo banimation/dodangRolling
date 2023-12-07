@@ -7,15 +7,21 @@
     font-family: 'Roboto', sans-serif;
 }
 body {
+    /* position: fixed; */
+    overflow-x: hidden;
     height: 100vh;
     width: 100vw;
     background-color: #1A1B22;
+}
+img {
+    image-rendering: pixelated;
 }
 #logo {
     width: 100px;
 }
 #menu-bar {
     position: fixed;
+    z-index: 2;
     width: 100vw;
     height: 70px;
     background: linear-gradient(90deg, rgba(66,255,215,1) 0%, rgba(72,73,255,1) 43%, rgba(255,0,202,1) 99%);
@@ -40,6 +46,12 @@ body {
     outline: none;
 }
 #main-container {
+    top: 0;
+    left: 0;    
+    position: absolute;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
     padding: 20px;
     padding-top: 70px;
     color: #fff;
@@ -58,7 +70,7 @@ body {
 #profile-image {
     width: 50px;
 }
-#logout {
+.btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,13 +80,10 @@ body {
     padding: 10px;
 }
 #show-rolling-paper {
-
-}
-#same-class {
-
-}
-#same-class-user-list {
-
+    background-image: image-set("../texture/snow/bg.jpg");
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    place-items: center;
 }
 .same-class-user {
     display: flex;
@@ -89,4 +98,50 @@ body {
 .same-class-user-image {
     width: 20px;
     margin-right: 10px;
+}
+#my-rolling-paper-container {
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    background-image: image-set("../texture/rolling-paper/bg2.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: transform .5s;
+}
+#back {
+    position: absolute;
+    color: #fff;
+    top: 30px;
+    left: 30px;
+}
+#tree {
+    position: absolute;
+    bottom: 20vh;
+    width: 400px;
+}
+#my-rolling-paper-container h1 {
+    font-size: 100px;
+    position: absolute;
+    bottom: 75vh;
+    color: #fff;
+}
+#load {
+    width: 100vw;
+    height: 200px;
+    position: absolute;
+    bottom: 0px;
+    background-color: #fff;
+    background-image: image-set("../texture/rolling-paper/load.png");
+    /* background-repeat: no-repeat;
+    background-size: cover; */
+}
+.hidden-right {
+    transform: translate(2000px);
 }

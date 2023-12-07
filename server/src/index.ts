@@ -2,7 +2,7 @@ import express from "express"
 import session from "express-session"
 import * as mysql from "mysql"
 import path from "node:path"
-import { password } from "../securety/config.json"
+import { password } from "../config/config.json"
 const server = express()
 
 const db = mysql.createConnection({ // 참조: https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server
@@ -31,6 +31,7 @@ interface userData {
     classId: number
     profileImage: number
     writtenUser: Array<number>
+    rollingPaper: Array<string>
 }
 interface sendingUserData {
     uid: number
@@ -40,6 +41,8 @@ interface sendingUserData {
     group: number
     classId: number
     profileImage: number
+    writtenUser: Array<number>
+    rollingPaper?: Array<string>
 }
 
 declare module 'express-session' {
@@ -53,6 +56,7 @@ declare module 'express-session' {
         classId: number
         profileImage: number
         writtenUser: Array<number>
+        rollingPaper: Array<string>
     }
 }
 
@@ -111,15 +115,16 @@ server.post("/sign-out", (req, res) => {
 })
 
 server.post("/get-session", (req, res) => {
-    const session = {
-        uid: req.session.uid,
-        nickName: req.session.nickName,
-        isTeacher: req.session.isTeacher,
-        grade: req.session.grade,
-        group: req.session.group,
-        classId: req.session.classId,
-        profileImage: req.session.profileImage,
-        writtenUser: req.session.writtenUser
+    const session: sendingUserData = {
+        uid: req.session.uid!,
+        nickName: req.session.nickName!,
+        isTeacher: req.session.isTeacher!,
+        grade: req.session.grade!,
+        group: req.session.group!,
+        classId: req.session.classId!,
+        profileImage: req.session.profileImage!,
+        writtenUser: req.session.writtenUser!,
+        rollingPaper: req.session.rollingPaper!
     }
     res.json({session})
 })
@@ -136,7 +141,8 @@ server.post("/get-same-class-user-data", (req, res) => {
                 grade: value.grade,
                 group: value.group,
                 classId: value.classId,
-                profileImage: value.profileImage
+                profileImage: value.profileImage,
+                writtenUser: value.writtenUser
             })
         })
         res.json({data})

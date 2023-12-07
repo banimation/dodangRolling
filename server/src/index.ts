@@ -124,7 +124,7 @@ server.post("/get-session", (req, res) => {
         classId: req.session.classId!,
         profileImage: req.session.profileImage!,
         writtenUser: req.session.writtenUser!,
-        rollingPaper: req.session.rollingPaper!
+        rollingPaper: req.session.rollingPaper! 
     }
     res.json({session})
 })

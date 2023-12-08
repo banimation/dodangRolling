@@ -16,7 +16,46 @@ body {
 }
 img {
     image-rendering: pixelated;
+}
+datalist {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    writing-mode: horizontal-tb;
+    width: 300px;
+}
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 40px;
+    background: #fff;
+    cursor: pointer;
+    width: 300px;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    border-radius: 40px;
+    background-color: blueviolet;
+    height: 1rem;
+    width: 1rem;
+}
+option {
+    padding: 0;
+}
+.show-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#logo {
     width: 400px;
+}
+#tiny-logo {
+    position: absolute;
+    bottom: 60vh;
+    width: 200px;
 }
 #title {
     position: absolute;
@@ -37,7 +76,7 @@ img {
     animation-direction: alternate;
     font-size: 1rem;
 }
-#sign-in-container {
+#sign-in-container, #sign-up-container {
     position: absolute;
     height: 100vh;
     width: 100vw;
@@ -48,25 +87,56 @@ img {
     padding-top: 20vh;
     color: #fff;
 }
-#username-input:focus , #password-input:focus  {
+#sign-in-username-input:focus , #sign-in-password-input:focus, #sign-up-username-input:focus , #sign-up-password-input:focus  {
     outline: none;
 }
-#username-input , #password-input  {
+#sign-in-username-input, #sign-in-password-input, #sign-up-username-input , #sign-up-password-input  {
     padding: 10px;
     width: 70vw;
     height: 4vh;
     border-radius: 10px;
     border: none;
 }
-#username, #password {
+#sign-in-username, #sign-in-password, #sign-up-username, #sign-up-password, #sign-up-user-info {
     margin-top: 5vh;
 }
-#Login {
+#sign-in-title, #sign-up-title {
     font-size: 3.5rem;
 }
-#sign-in {
+#sign-in, #sign-up {
     margin-top: 5vh;
     font-size: 2rem;
+}
+#sign-option {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .5s;
+    height: 100vh;
+}
+.option-btn {
+    border-radius: 40px;
+    background-color: #fff;
+    padding: 20px;
+    font-weight: bold;
+    width: 300px;
+    text-align: center;
+}
+#sign-up-user-info {
+    display: flex;
+    flex-direction: column;
+}
+#teacher-container {
+    margin-top: 2vh;
+}
+#checkbox {
+    display: flex;
+}
+#checkbox-input {
+    margin-left: 1vh;
 }
 @keyframes textAnime {
     from {

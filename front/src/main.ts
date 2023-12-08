@@ -5,6 +5,10 @@ const profileImage = document.getElementById("profile-image") as HTMLImageElemen
 const openMyrollingPaper = document.getElementById("open-my-rolling-paper") as HTMLElement
 const myRollingPaperContainer = document.getElementById("my-rolling-paper-container") as HTMLElement
 const back = document.getElementById("back") as HTMLElement
+const searchInput = document.getElementById("search-input") as HTMLInputElement
+const searchContainer = document.getElementById("search-container") as HTMLElement
+const userList = document.getElementById("search-user-list") as HTMLElement
+
 interface sendingUserData {
     uid: number
     nickName: string
@@ -13,7 +17,7 @@ interface sendingUserData {
     group: number
     classId: number
     profileImage: number
-    writtenUser?: Array<string>
+    writtenUser?: string
 }
 let userSession: sendingUserData
 fetch("/get-session", {
@@ -69,4 +73,51 @@ openMyrollingPaper.addEventListener("click", () => {
 })
 back.addEventListener("click", () => {
     myRollingPaperContainer.classList.add("hidden-right")
+})
+searchInput.addEventListener("focusin", () => {
+    searchContainer.classList.remove("hidden")
+})
+searchInput.addEventListener("focusout", () => {
+    searchContainer.classList.add("hidden")
+})
+searchInput.addEventListener("input", () => {
+    const data = {search: searchInput.value}
+    fetch("/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then((res) => {
+        userList.replaceChildren()
+        const userData = res.data
+        if(userData) {
+            userData.forEach((value: sendingUserData) => {
+                const userContainer = document.createElement("div") as HTMLElement
+                const nickName = document.createElement("div") as HTMLElement
+                const profileImage = document.createElement("img") as HTMLImageElement
+                const writeRollingPaper = document.createElement("div") as HTMLElement
+                userContainer.classList.add("search-user-container")
+                profileImage.classList.add("search-user-image")
+                writeRollingPaper.classList.add("write-rolling-paper")
+                profileImage.src = `/texture/profile/${value.profileImage}.png`
+                nickName.innerText = `${value.nickName}`
+                let isWritten = false
+                JSON.parse(userSession.writtenUser!).forEach((data: number) => {
+                    if(value.uid === data) {
+                        isWritten = true
+                    }
+                })
+                if(isWritten) {
+                    writeRollingPaper.innerHTML = `<span class="material-symbols-outlined">edit</span>`
+                } else {
+                    writeRollingPaper.innerHTML = `<span class="material-symbols-outlined">add</span>`
+                }
+                userContainer.append(profileImage)
+                userContainer.append(nickName)
+                userContainer.append(writeRollingPaper)
+                userList.append(userContainer)
+            })
+        }
+    })
 })

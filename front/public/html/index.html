@@ -8,20 +8,82 @@
 </head>
 <body>
     <div id="title">
-        <img src="/texture/logo-4.png" alt="logo" >
+        <img src="/texture/logo-4.png" alt="logo" id="logo">
         <div id="start">화면을 터치하여 시작하기!</div>
     </div>
+    <div id="sign-option" class="hidden">
+        <img src="/texture/logo-4.png" alt="logo" id="tiny-logo">
+        <div id="sign-up-option" class="option-btn">계정 생성</div>
+        <div id="sign-in-option" class="option-btn">로그인</div>
+    </div>
     <div id="sign-in-container" class="hidden">
-        <h1 id="Login">Login</h1>
-        <div id="username">
+        <h1 id="sign-in-title">로그인</h1>
+        <div id="sign-in-username">
             <h1>Username</h1>
-            <input type="text" id="username-input">
+            <input type="text" id="sign-in-username-input">
         </div>
-        <div id="password">
+        <div id="sign-in-password">
             <h1>Password</h1>
-            <input type="text" id="password-input">
+            <input type="text" id="sign-in-password-input">
         </div>
         <div id="sign-in">Sign In</div>
+    </div>
+    <div id="sign-up-container" class="hidden">
+        <h1 id="sign-up-title">계정 생성</h1>
+        <div id="sign-up-user-info">
+            <div id="grade-container">
+                <div class="show-info">
+                    <h1>학년</h1>
+                    <h2 id="show-grade">1학년</h2>
+                </div>
+                
+                <input type="range" min="1" max="3" id="grade" list="grade-markers" value="1">
+                <datalist id="grade-markers">
+                    <option value="1" label="1"></option>
+                    <option value="2" label="2"></option>
+                    <option value="3" label="3"></option>
+                </datalist>
+            </div>
+            <div id="group-container">
+                <div class="show-info">
+                    <h1>반</h1>
+                    <h2 id="show-group">1반</h2>
+                </div>
+
+                <input type="range" min="1" max="10" id="group" list="group-markers" value="1">
+                <datalist id="group-markers">
+                    <option value="1" label="1"></option>
+                    <option value="2" label="2"></option>
+                    <option value="3" label="3"></option>
+                    <option value="4" label="4"></option>
+                    <option value="5" label="5"></option>
+                    <option value="6" label="6"></option>
+                    <option value="7" label="7"></option>
+                    <option value="8" label="8"></option>
+                    <option value="9" label="9"></option>
+                    <option value="10" label="10"></option>
+                </datalist>
+            </div>
+            <div id="teacher-container">
+                <div id="checkbox">
+                    <h3>선생님 인증</h3>
+                    <input type="checkbox" id="checkbox-input">
+                </div>
+                <div id="teacher-code-container" class="hidden">
+                    <h5>선생님 인증 코드 입력</h5>
+                    <input type="text" id="teacher-code-input">
+                </div>
+            </div>
+        </div>
+        <div id="sign-up-username">
+            <h1>Username</h1>
+            <input type="text" id="sign-up-username-input">
+        </div>
+        <div id="sign-up-password">
+            <h1>Password</h1>
+            <input type="text" id="sign-up-password-input">
+        </div>
+        <div id="sign-up">Sign Up</div>
     </div>
 </body>
 <script src="/dist/index_bundle.js"></script>

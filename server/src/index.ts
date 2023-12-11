@@ -32,6 +32,7 @@ interface userData {
     profileImage: number
     writtenUser: string
     rollingPaper: string
+    theme: number
 }
 interface sendingUserData {
     uid: number
@@ -42,6 +43,7 @@ interface sendingUserData {
     profileImage: number
     writtenUser: string
     rollingPaper?: string
+    theme: number
 }
 
 declare module 'express-session' {
@@ -55,6 +57,7 @@ declare module 'express-session' {
         profileImage: number
         writtenUser: string
         rollingPaper: string
+        theme: number
     }
 }
 
@@ -96,6 +99,7 @@ server.post("/sign-in", (req, res) => {
                 req.session.group = account.classGroup
                 req.session.profileImage = account.profileImage
                 req.session.writtenUser = account.writtenUser
+                req.session.theme = account.theme
                 res.json({msg: "succeed"})
             } else {
                 res.json({msg: "wrongPassword"})
@@ -158,7 +162,8 @@ server.post("/get-session", (req, res) => {
         group: req.session.group!,
         profileImage: req.session.profileImage!,
         writtenUser: req.session.writtenUser!,
-        rollingPaper: req.session.rollingPaper! 
+        rollingPaper: req.session.rollingPaper!,
+        theme: req.session.theme!
     }
     res.json({session})
 })
@@ -175,7 +180,8 @@ server.post("/get-same-class-user-data", (req, res) => {
                 grade: value.grade,
                 group: value.group,
                 profileImage: value.profileImage,
-                writtenUser: value.writtenUser
+                writtenUser: value.writtenUser,
+                theme: value.theme
             })
         })
         res.json({data})
@@ -198,7 +204,8 @@ server.post("/search", (req, res) => {
                         grade: value.grade,
                         group: value.group,
                         profileImage: value.profileImage,
-                        writtenUser: value.writtenUser
+                        writtenUser: value.writtenUser,
+                        theme: value.theme
                     })
                 })
                 res.json({data})

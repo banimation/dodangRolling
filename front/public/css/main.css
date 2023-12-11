@@ -92,6 +92,7 @@ img {
     padding-top: 70px;
     color: #fff;
 }
+
 .box {
     margin-top: 40px;
     border-radius: 20px;
@@ -135,31 +136,54 @@ img {
     width: 20px;
     margin-right: 10px;
 }
-#my-rolling-paper-container {
+#my-rolling-paper-container, #post-container {
     z-index: 3;
     width: 100vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
-    background-image: image-set("../texture/rolling-paper/bg2.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: rgb(38,38,97);
+    background: linear-gradient(0deg, rgba(38,38,97,1) 31%, rgba(0,0,0,1) 99%);
     transition: transform .5s;
 }
-#back {
+.back {
     position: absolute;
     color: #fff;
     top: 30px;
     left: 30px;
 }
-#tree {
+.sky {
     position: absolute;
-    bottom: 20vh;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    animation: spin;
+    animation-duration: 50s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.star {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.mountain {
+    z-index: 3;
+    position: absolute;
+    bottom: 199px;
     width: 400px;
 }
 #my-rolling-paper-container h1 {
@@ -168,18 +192,101 @@ img {
     bottom: 75vh;
     color: #fff;
 }
-#load {
+#my-rolling-paper {
+    position: absolute;
+    bottom: 20vh;
+    width: 400px;
+    height: 400px;
+}
+.load {
     width: 100vw;
     height: 200px;
+    background-color: #fff;
     position: absolute;
     bottom: 0px;
-    background-color: #fff;
-    background-image: image-set("../texture/rolling-paper/load.png");
-    /* background-repeat: no-repeat;
-    background-size: cover; */
 }
+#post-back {
+    z-index: 5;
+}
+#rolling-paper-owner {
+    font-size: 30px;
+    position: absolute;
+    bottom: 75vh;
+    color: #fff;
+}
+#write-btn-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+.write-btn {
+    position: absolute;
+    bottom: 10vh;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+    color: #fff;
+    padding: 20px;
+    z-index: 5;
+    width: 70vw;
+    background-color: #fff;
+    background-image: url(/texture/rolling-paper/bg2.png);
+    background-position: center;
+    background-size: cover;
+    border-radius: 20px;
+    border: solid 6px #000;
+    box-shadow: 1px 1px 0px #000,
+                2px 2px 0px #000,
+                3px 3px 0px #000,
+                4px 4px 0px #000,
+                5px 5px 0px #000,
+                6px 6px 0px #000,
+                7px 7px 0px #000,
+                8px 8px 0px #000;
+}
+.write-btn:hover {
+    box-shadow: 1px 1px 0px #000,
+                2px 2px 0px #000,
+                3px 3px 0px #000,
+                4px 4px 0px #000,
+                5px 5px 0px #000,
+                6px 6px 0px #000,
+                7px 7px 0px #000;
+    transform: translate(3px, 1px);
+}
+#write-container {
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1A1B22;
+    color: #fff;
+    /* background-image: image-set("../texture/rolling-paper/bg2.png"); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: transform .5s;
+    gap: 40px;
+}
+#paper-title, #paper-description, #writer-name{
+    padding: 10px;
+    width: 70vw;
+    height: 4vh;
+    border-radius: 10px;
+    border: none;
+}
+
 .hidden-right {
     transform: translate(2000px);
+}
+.hidden-left {
+    transform: translate(-2000px);
 }
 .hidden {
     visibility: hidden;

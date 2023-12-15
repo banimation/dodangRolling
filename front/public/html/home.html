@@ -18,6 +18,25 @@
         </div>
         <span class="material-symbols-outlined" id="menu">menu</span>
     </div>
+    <div id="menu-box" class="hidden-right">
+        <div id="profile-setting-btn">프로필 설정</div>
+        <div>고객센터</div>
+        <div>로그아웃</div>
+    </div>
+    <div id="profile-setting-container" class="hidden-bottom">
+        <div id="profile-setting-bar">
+            <div id="profile-setting-back"><span class="material-symbols-outlined">arrow_back_ios</span></div>
+            <div>프로필 설정</div>
+        </div>
+        <div id="profile-setting-body">
+            <div id="my-profile">
+                <h3>현재 프로필 이미지</h3>
+                <img id="my-profile-image"></img>
+            </div>
+            <div id="image-options"></div>
+        </div>
+    </div>
+    <div id="blind" class="hidden"></div>
     <div id="search-container" class="hidden">
         <div id="search-user-list">
 
@@ -44,17 +63,33 @@
         </div>
     </div>
     <div id="my-rolling-paper-container" class="hidden-right">
-        <h1>D-?</h1>
+        <h1>내 롤링페이퍼</h1>
+        <div id="page">
+            <div id="prior"><span class="material-symbols-outlined">arrow_back_ios_new</span></div>
+            <div id="current-page"></div>
+            <div id="next"><span class="material-symbols-outlined">arrow_forward_ios</span></div>
+        </div>
         <div id="my-sky" class="sky"></div>
         <div id="back" class="back"><span class="material-symbols-outlined">arrow_back_ios</span></div>
-        <div id="my-rolling-paper"></div>
+        <div id="my-rp"></div>
+        <div id="letter" class="hidden">
+            <div id="close"><span class="material-symbols-outlined">close</span></div>
+            <h2 id="letter-title"></h2>
+            <div id="letter-description"></div>
+        </div>
         <img src="/texture/mountain.png" alt="" class="mountain">
         <div class="load"></div>
     </div>
-    <div id="post-container" class="hidden-right">
+    <div id="user-rp-container" class="hidden-right">
         <h2 id="rolling-paper-owner"></h2>
+        <div id="user-page">
+            <div id="user-prior"><span class="material-symbols-outlined">arrow_back_ios_new</span></div>
+            <div id="user-current-page"></div>
+            <div id="user-next"><span class="material-symbols-outlined">arrow_forward_ios</span></div>
+        </div>
+        <div id="user-rp"></div>
         <div id="user-sky" class="sky"></div>
-        <div id="post-back" class="back"><span class="material-symbols-outlined">arrow_back_ios</span></div>
+        <div id="user-back" class="back"><span class="material-symbols-outlined">arrow_back_ios</span></div>
         <img src="/texture/mountain.png" alt="" class="mountain">
         <div class="load"></div>
         <div id="write-btn-container"></div>

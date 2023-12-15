@@ -1,4 +1,4 @@
-import express from "express"
+import express, { json } from "express"
 import session from "express-session"
 import * as mysql from "mysql"
 import path from "node:path"
@@ -12,6 +12,7 @@ const db = mysql.createConnection({ // 참조: https://stackoverflow.com/questio
     password: password,
     database: "rollingUserAccount"
 })
+const openData = 29
 
 db.connect()
 
@@ -44,6 +45,11 @@ interface sendingUserData {
     writtenUser: string
     rollingPaper?: string
     theme: number
+}
+interface rollingPaper {
+    title: string, 
+    description?: string, 
+    author?: string
 }
 
 declare module 'express-session' {
@@ -126,7 +132,7 @@ server.post("/sign-up", (req, res) => {
         if(result.length === 0) {
             if(!userName.match(pattern) && !password.match(pattern)) {
                 if((userName.length <= 8 && password.length <= 20)) {
-                    db.query("INSERT INTO topic(password, nickName, isTeacher, grade, classGroup, writtenUser, profileImage, rollingPaper) VALUE(?, ?, ?, ?, ?, ?, ?, ?);", [password, userName, isTeacher, grade, group, '[]', 10, '[]'], (err, _result) => {
+                    db.query("INSERT INTO topic(password, nickName, isTeacher, grade, classGroup, writtenUser, profileImage, rollingPaper, theme) VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?);", [password, userName, isTeacher, grade, group, '[]', 10, '[]', 0], (err, _result) => {
                         if(err) throw err
                         res.json({msg: "succeed"})
                     })
@@ -216,6 +222,70 @@ server.post("/search", (req, res) => {
     } else {
         res.json({})
     }
+})
+
+server.post("/get-user-rp", (req, res) => {
+    const uid: number = req.body.uid
+    const date = new Date()
+    db.query("SELECT * FROM topic WHERE uid=?", [uid], (err, result) => {
+        if(err) throw err
+        if(uid === req.session.uid) {
+            if(date.getDate() === openData) {
+                res.json({rollingPaper: JSON.parse(result[0].rollingPaper)})
+            } else {
+                const rollingPaper: Array<rollingPaper> = JSON.parse(result[0].rollingPaper)
+                const data: Array<rollingPaper> = []
+                rollingPaper.forEach((element) => {
+                    data.push({title: element.title})
+                })
+                res.json({rollingPaper: data})
+            }
+        } else {
+            const rollingPaper: Array<rollingPaper> = JSON.parse(result[0].rollingPaper)
+            const data: Array<rollingPaper> = []
+            rollingPaper.forEach((element) => {
+                data.push({title: element.title})
+            })
+            res.json({rollingPaper: data})
+        }
+    })
+        
+    
+})
+
+server.post("/post-paper", (req, res) => {
+    const title = req.body.paperTitle
+    const description = req.body.paperDescription
+    const author = req.body.author
+    const rpOwnerUid = req.body.rpOwnerUid
+    const rollingPaper = {title, description, author}
+    db.query("SELECT * FROM topic WHERE uid=?", [rpOwnerUid], (err, result: Array<userData>) => {
+        if(err) throw err
+        const userRp = JSON.parse(result[0].rollingPaper)
+        userRp.push(rollingPaper)
+        db.query("UPDATE topic SET rollingPaper=? WHERE uid=?", [JSON.stringify(userRp), rpOwnerUid], (err, _result) => {
+            if(err) throw err
+            res.json({msg: "succeed"})
+        })
+    })
+})
+
+server.post("/verfity-date", (_req, res) => {
+    const date = new Date()
+    if(date.getDate() === openData) {
+        res.json({msg: true, remainingDate: 29-date.getDate()})
+    } else {
+        res.json({msg: false})
+    }
+})
+
+server.post("/change-profile-image", (req, res) => {
+    const imgNumber = req.body.imgNumber
+    db.query("UPDATE topic SET profileImage=? WHERE uid=?", [imgNumber, req.session.uid], (err, _result) => {
+        if(err) throw err
+        req.session.profileImage = imgNumber
+        res.json({msg: "succeed"})
+    })
 })
 
 server.use(express.static(`${__dirname}/../../front/public`))
